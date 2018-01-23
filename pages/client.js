@@ -3,7 +3,9 @@ const 	consonants = "BBCCCDDDDDDFFGGGHHJKLLLLLMMMMNNNNNNNNPPPPQRRRRRRRRRSSSSSSSS
 		lettersChosen = [];
 
 //query selectors
-const 	selectVowel = document.querySelector('#vowel'),
+const 	clock = document.querySelector('#clock'),
+		letters = document.querySelector('#letters'),
+		selectVowel = document.querySelector('#vowel'),
 		selectConsonant = document.querySelector('#consonant');
 
 //event listeners
@@ -12,11 +14,8 @@ selectConsonant.addEventListener('click', drawConsonant);
 
 function drawConsonant(){
 	lettersChosen.push(consonants.charAt(Math.floor(Math.random() * consonants.length)));
-	console.log(lettersChosen);
-	
 }
 
 function drawVowel(){
 	lettersChosen.push(vowels.charAt(Math.floor(Math.random() * vowels.length)));
-	console.log(lettersChosen);
 }
