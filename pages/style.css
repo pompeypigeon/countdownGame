@@ -1,4 +1,18 @@
-canvas{
-	border: 1px solid black;
+body{
+	font-family: Arial, sans-serif;
+	background-color: lightblue;
 }
 
+canvas{
+	border: 1px solid black;
+	background-color: white;
+}
+
+#letters li{
+	display: inline;
+	border: 1px solid black;
+	padding: 0.8em;
+	margin: 1em;
+	color: white;
+	background-color: darkblue;
+}
