@@ -3,6 +3,8 @@
 var express = require('express'),
 		app = express(),
 		fs = require('fs'),
+    		checkword = require('check-word'),
+    		words = checkword('en'),
     port = process.env.PORT || 8080,
 
     server = app.listen(port, function(){
@@ -48,3 +50,7 @@ function generateLetter(type) {
 }
 
 // generateLetter(type)
+
+app.get('/checkword/:id', function(req,res){
+	res.send(words.check(req.params.id));
+});
