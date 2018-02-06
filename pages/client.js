@@ -1,43 +1,65 @@
 const 	consonants = "BBCCCDDDDDDFFGGGHHJKLLLLLMMMMNNNNNNNNPPPPQRRRRRRRRRSSSSSSSSSTTTTTTTTTVWXYZ",
-		vowels = "AAAAAAAAAAAAAAAEEEEEEEEEEEEEEEEEEEEEIIIIIIIIIIIIIOOOOOOOOOOOOOUUUUU",
-		lettersChosen = [];
+				vowels = "AAAAAAAAAAAAAAAEEEEEEEEEEEEEEEEEEEEEIIIIIIIIIIIIIOOOOOOOOOOOOOUUUUU",
+				lettersChosen = [];
 
-var		gameStarted = false;
+var		gameStarted = false,
+			letterTypeChosen;
 
 //query selectors
 const 	clock = document.querySelector('#clock'),
-		letters = document.querySelector('#letters'),
-		startGame = document.querySelector('#startGame');
+				letters = document.querySelector('#letters'),
+				startGame = document.querySelector('#startGame'),
+				vowelButton = document.querySelector('#vowel'),
+				consonantButton = document.querySelector('#consonant');
 
 
 //event listeners
 startGame.addEventListener('click', startCountdown);
 
+function addVowel(){
+	var newVowel = vowels.charAt(Math.floor(Math.random() * vowels.length));
+	if (lettersChosen.length < 9){
+		lettersChosen.push(newVowel);
+		letters.childNodes[lettersChosen.length].innerText = newVowel;
+		console.log(lettersChosen)
+	} else {
+		console.log("Too many letters, game should start")
+	}
+}
+
+function addConsonant(){
+	var newConsonant = consonants.charAt(Math.floor(Math.random() * consonants.length));
+	if (lettersChosen.length < 9){
+		lettersChosen.push(newConsonant);
+		letters.childNodes[lettersChosen.length].innerText = newConsonant;
+		console.log(lettersChosen);
+	} else {
+		console.log("Too many letters, game should start")
+	}
+}
+
+function waitForLetters(){
+	if (lettersChosen.length != 9){
+		setTimeout(waitForLetters, 100);
+		console.log("Not there")
+		return;
+	} else {
+		console.log("Start Clock")
+	}
+}
+	
+
 var userChoice;
 
 function startCountdown(){
 	if(!gameStarted == true){
-		var chosen = 1, nextLetter;
-		for(chosen = 1; chosen < 10; chosen++){
-			var choice = prompt("Please choose a V for vowel or C for consonant", "").toUpperCase();
-			switch (choice){
-				case "V":
-					nextLetter = vowels.charAt(Math.floor(Math.random() * vowels.length));
-					lettersChosen.push(nextLetter);
-					letters.childNodes[chosen].innerText = nextLetter;
-					break;
-				case "C":
-					nextLetter = consonants.charAt(Math.floor(Math.random() * consonants.length));
-					lettersChosen.push(nextLetter);
-					letters.childNodes[chosen].innerText = nextLetter;
-					break;
-			}
-			console.log(nextLetter, lettersChosen);
-			letters.childNodes[chosen].innerText = nextLetter;
-			nextLetter = "";
-		}
+		gameStarted = true;
+		vowelButton.addEventListener('click', addVowel);
+		consonantButton.addEventListener('click', addConsonant);
+	
+		waitForLetters();
+
 		
-	} else {
-		alert("Game already started");
 	}
 }
+

@@ -3,16 +3,42 @@ body{
 	background-color: lightblue;
 }
 
+header{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: darkblue;
+	color: white;
+	padding-left: 2em;
+}
+
+article{
+	padding-top: 5em;
+}
+
 canvas{
-	border: 1px solid black;
-	background-color: white;
+	position: fixed;
+	margin-left: auto;
+	margin-right: auto;
+	width: 300px;
+	background-image: url("clock.jpg");
+}
+
+#letters{
+	position: fixed;	
+	padding-top: 20em;
 }
 
 #letters li{
-	display: inline;
+	display: inline-block;
 	border: 1px solid black;
 	padding: 0.8em;
 	margin: 1em;
 	color: white;
 	background-color: darkblue;
+}
+
+#playerInput{
+	padding-top: 25em;
 }

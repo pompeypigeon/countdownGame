@@ -4,10 +4,10 @@
 	</head>
 	<body>
 		<header>
-			<h1>Countdown</h1>
+			<h1>COUNTDOWN</h1>
 		</header>
 		<article id=gameScreen>
-			<canvas id=clock>
+			<canvas id=clock width=300px height=300px>
 			
 			</canvas>
 				<ul id=letters>
@@ -21,16 +21,22 @@
 					<li id=8> 
 					<li id=9> 
 				</ul>
-			<p><button id=startGame>Start Game</button></p>
+			<div id=playerInput>
+				<p><button id=startGame>Start Game</button></p>
+				<p><button id=vowel>Vowel</button><button id=consonant>Consonant</button>
+				<p><input id=playerWord></p>
+				<p id=largestWord>
+			</div>
 			
-			<p><input id=playerWord></p>
 			
-			<p id=largestWord>
+			
+			
 		</article>
 		<aside id=playerScore></aside>
 		<footer>
 			<p>WEBRES Sprint 2 Group 6</p>
 		</footer>
 	</body>
+	<script src=clock.js></script>
 	<script src=client.js></script>
 </html>
