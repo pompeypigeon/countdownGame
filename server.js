@@ -50,6 +50,7 @@ function generateLetter(type) {
 }
 
 // generateLetter(type)
+app.use(express.static(__dirname + '/pages'));
 
 app.get('/checkword/:id', function(req,res){
 	res.send(words.check(req.params.id));
