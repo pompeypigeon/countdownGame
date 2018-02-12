@@ -2,7 +2,8 @@
 var		userChoice,
 			gameStarted = false,
 			lettersChosen = [],
-			letterTypeChosen;
+			letterTypeChosen,
+			socket = io();
 
 //query selectors
 const 	clock = document.querySelector('#clock'),
@@ -57,6 +58,9 @@ function waitForLetters(){
 		console.log("Not there")
 		return;
 	} else {
-		console.log("Start Clock")
+		socket.emit('startClock');
+		socket.on('wordResponse', function(data){
+			console.log(data);
+		});
 	}
 }

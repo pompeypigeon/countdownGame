@@ -1,14 +1,13 @@
 'use strict'
 
-var express = require('express'),
+var	fs = require('fs'),
+		express = require('express'),
 		app = express(),
-		fs = require('fs'),
-    checkword = require('check-word'),
-    words = checkword('en'),
-    port = process.env.PORT || 8080,
-    server = app.listen(port, function(){
-      console.log("server started on " + port)
-    });
+		http = require('http').Server(app),
+		io = require('socket.io')(http),
+		checkword = require('check-word'),
+		words = checkword('en'),
+		Stopwatch = require('timer-stopwatch');
 
 //serve static html page
 app.use(express.static(__dirname + '/pages'));
@@ -23,6 +22,36 @@ app.get('/letter/:type', function(req,res){
 	res.send(generateLetter(req.params.type));
 });
 
+//socket stuff
+io.on('connection', function(socket){
+    console.log('A user connected');
+    console.log(Object.keys(io.sockets.sockets).length);
+    socket.on('clientTest', function(data) {
+        console.log(data);
+        console.log(words.check(data.toLowerCase()));
+        socket.emit('wordResponse', 'Your word is ' + words.check(data.toLowerCase()));
+        //socket.send('Your word is ' + words.check(data.toLowerCase()));
+    })
+    socket.on('startClock', function(){
+        var timer = new Stopwatch(30000);
+        timer.start();
+        timer.onTime(function(time){
+            console.log(time.ms);
+            io.sockets.emit('timeLeft','Time left: ' + time.ms);
+        })
+        timer.onDone(function(){
+            console.log('we done bitches');
+            socket.emit('TIMES UP MUDDA');
+        })
+    })
+    socket.on('disconnect', function(){
+        console.log('Fuckity bye!');
+    });
+});
+
+http.listen(3000, function(){
+	console.log('listening on *:3000');
+});
 //============================================= FUNCTIONS ============================================
 
 //read letter frequenies from frequency.json
