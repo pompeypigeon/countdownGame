@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/pompeypigeon/countdownGame/issues"
   },
-  "homepage": "https://github.com/pompeypigeon/countdownGame#readme"
+  "homepage": "https://github.com/pompeypigeon/countdownGame#readme",
+  "dependencies": {
+    "check-word": "^1.1.0",
+    "express": "^4.16.2",
+    "socket.io": "^2.0.4"
+  }
 }

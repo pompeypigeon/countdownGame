@@ -1,8 +1,7 @@
-const 	consonants = "BBCCCDDDDDDFFGGGHHJKLLLLLMMMMNNNNNNNNPPPPQRRRRRRRRRSSSSSSSSSTTTTTTTTTVWXYZ",
-				vowels = "AAAAAAAAAAAAAAAEEEEEEEEEEEEEEEEEEEEEIIIIIIIIIIIIIOOOOOOOOOOOOOUUUUU",
-				lettersChosen = [];
-
-var		gameStarted = false,
+'use strict'
+var		userChoice,
+			gameStarted = false,
+			lettersChosen = [],
 			letterTypeChosen;
 
 //query selectors
@@ -12,27 +11,41 @@ const 	clock = document.querySelector('#clock'),
 				vowelButton = document.querySelector('#vowel'),
 				consonantButton = document.querySelector('#consonant');
 
-
 //event listeners
 startGame.addEventListener('click', startCountdown);
 
-function addVowel(){
-	var newVowel = vowels.charAt(Math.floor(Math.random() * vowels.length));
-	if (lettersChosen.length < 9){
-		lettersChosen.push(newVowel);
-		letters.childNodes[lettersChosen.length].innerText = newVowel;
-		console.log(lettersChosen)
-	} else {
-		console.log("Too many letters, game should start")
+function startCountdown(){
+	if(!gameStarted == true){
+		gameStarted = true;
+		vowelButton.addEventListener('click', getVowel);
+		consonantButton.addEventListener('click', getConsonant);
+		waitForLetters();
 	}
 }
 
-function addConsonant(){
-	var newConsonant = consonants.charAt(Math.floor(Math.random() * consonants.length));
-	if (lettersChosen.length < 9){
-		lettersChosen.push(newConsonant);
-		letters.childNodes[lettersChosen.length].innerText = newConsonant;
-		console.log(lettersChosen);
+//XHR to get a vowel from server
+function getVowel(){
+	var xml = new XMLHttpRequest();
+	xml.addEventListener('load', addLetter);
+	xml.open('GET', window.location.href + 'letter/Vowel');
+	xml.send();
+}
+
+//XHR to get a consonant from server
+function getConsonant(){
+	var xml = new XMLHttpRequest();
+	xml.addEventListener('load', addLetter);
+	xml.open('GET', window.location.href + 'letter/Consonant');
+	xml.send();
+}
+
+//add the letter to the list of letters in the game and display it.
+function addLetter(){
+	var newLetter = this.responseText;
+	if (lettersChosen.length != 9){
+		lettersChosen.push(newLetter);
+		letters.childNodes[lettersChosen.length].innerText = newLetter;
+		console.log(lettersChosen)
 	} else {
 		console.log("Too many letters, game should start")
 	}
@@ -47,19 +60,3 @@ function waitForLetters(){
 		console.log("Start Clock")
 	}
 }
-	
-
-var userChoice;
-
-function startCountdown(){
-	if(!gameStarted == true){
-		gameStarted = true;
-		vowelButton.addEventListener('click', addVowel);
-		consonantButton.addEventListener('click', addConsonant);
-	
-		waitForLetters();
-
-		
-	}
-}
-
