@@ -31,7 +31,6 @@ header{
 }
 
 #gameScreen{
-	display: none;
 	padding-top: 5em;
 }
 
@@ -51,6 +50,7 @@ canvas{
 #letters{
 	position: absolute;
 	padding-top: 25em;
+	padding-left: 30%;
 }
 
 #letters li{
@@ -63,5 +63,5 @@ canvas{
 }
 
 #playerInput{
-	padding-top: 25em;
+	padding-top: 30em;
 }
