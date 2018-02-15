@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Hello world</title>
+   </head>
+     <script src = "/socket.io/socket.io.js"></script>
+    
+    <script> var socket = io();
+        //socket.on('message', function(data){document.write(data)});
+         //socket.on('timeLeft', function(data){document.getElementById('time').innerHTML = data});
+    </script>
+    
+    <body>Hello world</body>
+    
+    <button onclick="test()">Click me</button>
+    <button onclick="test2()">Click me</button>
+    
+    
+    <textarea id="submission"></textarea>
+    
+    <p id="cons">Time Left: </p>
+    
+    <p id="time">Time Left: </p>
+    
+    <p id="scoring">Score: </p>
+    
+    
+    <script>
+        
+         var score = 0;
+        
+        //var shit = document.getElementbyID('submission').value;
+        socket.on('letterResponse', function(data){                   document.getElementById('time').innerHTML = data;
+          score = score + 1;
+          document.getElementById('scoring').innerHTML = "Score: " + score;                                         
+                                                   
+        });
+        
+        socket.on('letterResponse2', function(data){document.getElementById('cons').innerHTML = data;
+         score++;
+                                                    document.getElementById('scoring').innerHTML = "Score: " + score;  
+                                                   });
+        
+        
+        function test2(){
+            socket.emit('letterRequest','Consonant');
+            
+            
+        }
+        
+        function test(){
+            
+            console.log('clicked');
+            //socket.emit('startClock');
+            
+            socket.emit('letterRequest','Vowel');
+            
+
+            
+            //socket.on('wordResponse', function(data){document.write(data)});
+            
+            //socket.emit('clientTest',document.getElementById('submission').value);
+            
+        }
+    </script>
+    
+</html>

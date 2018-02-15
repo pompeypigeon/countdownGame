@@ -44,6 +44,22 @@ io.on('connection', function(socket){
             socket.emit('Time is up');
         })
     })
+    
+    
+    socket.on('letterRequest', function(data){
+        var letter = generateLetter(data);
+        console.log(letter);
+        
+        if(data == "Vowel"){
+            io.sockets.emit('letterResponse',letter);
+        }
+        else{
+            io.sockets.emit('letterResponse2',letter);
+        }
+        
+    })
+    
+    
     socket.on('disconnect', function(){
         console.log('User disconnected');
     });
