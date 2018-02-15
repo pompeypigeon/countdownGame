@@ -33,33 +33,33 @@ function startCountdown(){
 	}
 }
 
-//XHR to get a vowel from server
+//socket to get a vowel from server
 function getVowel(){
-	var xml = new XMLHttpRequest();
-	xml.addEventListener('load', addLetter);
-	xml.open('GET', window.location.href + 'letter/Vowel');
-	xml.send();
+	
+    socket.emit('letterRequest', 'Vowel');
+    
 }
 
-//XHR to get a consonant from server
+//socket to get a consonant from server
 function getConsonant(){
-	var xml = new XMLHttpRequest();
-	xml.addEventListener('load', addLetter);
-	xml.open('GET', window.location.href + 'letter/Consonant');
-	xml.send();
+    
+    socket.emit('letterRequest', 'Consonant');
 }
 
 //add the letter to the list of letters in the game and display it.
-function addLetter(){
-	var newLetter = this.responseText;
-	if (lettersChosen.length != 9){
-		lettersChosen.push(newLetter);
-		letters.childNodes[lettersChosen.length].innerText = newLetter;
+
+socket.on('letterResponse', function(data){
+
+    if (lettersChosen.length != 9){
+		lettersChosen.push(data);
+		letters.childNodes[lettersChosen.length].innerText = data;
 		console.log(lettersChosen)
 	} else {
 		console.log("Too many letters, game should start")
 	}
-}
+
+        })
+
 
 function waitForLetters(){
 	if (lettersChosen.length != 9){
