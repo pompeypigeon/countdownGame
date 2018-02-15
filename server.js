@@ -41,7 +41,7 @@ io.on('connection', function(socket){
         timer.start();
         timer.onTime(function(time){
             console.log(time.ms);
-            io.sockets.emit('timeLeft', time.ms);
+            socket.emit('timeLeft', time.ms);
         })
         timer.onDone(function(){
             console.log('Done');
@@ -53,12 +53,7 @@ io.on('connection', function(socket){
     socket.on('letterRequest', function(data){
         var letter = generateLetter(data);
         console.log(letter);
-        if(data == "Vowel"){
-            io.sockets.emit('letterResponse',letter);
-        }
-        else{
-            io.sockets.emit('letterResponse2',letter);
-        }
+        io.sockets.emit('letterResponse',letter);
     })
 
 		//DISCONNECT=======================================
