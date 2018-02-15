@@ -26,40 +26,42 @@ app.get('/letter/:type', function(req,res){
 io.on('connection', function(socket){
     console.log('A user connected');
     console.log(Object.keys(io.sockets.sockets).length);
-    socket.on('clientTest', function(data) {
+
+		//WORD CHECK========================================
+    socket.on('wordValidity', function(data) {
         console.log(data);
         console.log(words.check(data.toLowerCase()));
-        socket.emit('wordResponse', 'Your word is ' + words.check(data.toLowerCase()));
+        socket.emit('wordResponse', words.check(data.toLowerCase()));
         //socket.send('Your word is ' + words.check(data.toLowerCase()));
     })
+
+		//CLOCK============================================
     socket.on('startClock', function(){
         var timer = new Stopwatch(30000);
         timer.start();
         timer.onTime(function(time){
             console.log(time.ms);
-            io.sockets.emit('timeLeft','Time left: ' + time.ms);
+            io.sockets.emit('timeLeft', time.ms);
         })
         timer.onDone(function(){
             console.log('Done');
             socket.emit('Time is up');
         })
     })
-    
-    
+
+		//SEND LETTER======================================
     socket.on('letterRequest', function(data){
         var letter = generateLetter(data);
         console.log(letter);
-        
         if(data == "Vowel"){
             io.sockets.emit('letterResponse',letter);
         }
         else{
             io.sockets.emit('letterResponse2',letter);
         }
-        
     })
-    
-    
+
+		//DISCONNECT=======================================
     socket.on('disconnect', function(){
         console.log('User disconnected');
     });

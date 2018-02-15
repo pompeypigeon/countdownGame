@@ -1,9 +1,9 @@
 'use strict'
-var		userChoice,
-			gameStarted = false,
+var		gameStarted = false,
 			lettersChosen = [],
-			letterTypeChosen,
-			socket = io();
+			socket = io(),
+			time,
+			totalScore = 0;
 
 //query selectors
 const 	splashScreen = document.querySelector('#splashScreen'),
@@ -12,19 +12,21 @@ const 	splashScreen = document.querySelector('#splashScreen'),
 				letters = document.querySelector('#letters'),
 				vowelButton = document.querySelector('#vowel'),
 				consonantButton = document.querySelector('#consonant'),
-				startSolo = document.querySelector('#solo'),
-				startMulti = document.querySelector('#multi');
+				wasItRight = document.querySelector('#wasItRight'),
+				playerWord = document.querySelector('#playerWord'),
+				startAgainButton = document.querySelector('#startAgain');
 
 //event listeners
-startSolo.addEventListener('click', startCountdown);
-startMulti.addEventListener('click', startCountdown);
+
+socket.on('timeLeft', function(data){
+	time = data;
+	document.getElementById('timeLeft').innerHTML = data;
+})
 
 function startCountdown(){
 	if(!gameStarted == true){
+		startAgainButton.style.visibility = 'hidden';
 		gameStarted = true;
-		console.log("Why?");
-		gameStarted.style.display = 'absolute';
-		splashScreen.style.display = 'none';
 		vowelButton.addEventListener('click', getVowel);
 		consonantButton.addEventListener('click', getConsonant);
 		waitForLetters();
@@ -66,8 +68,44 @@ function waitForLetters(){
 		return;
 	} else {
 		socket.emit('startClock');
+		waitForCountdown();
+	}
+}
+
+function waitForCountdown(){
+	if (time!= 0){
+		setTimeout(waitForCountdown, 100);
+		return
+	} else {
+		socket.emit('wordValidity', document.querySelector('#playerWord').value)
 		socket.on('wordResponse', function(data){
-			console.log(data);
+			if (data === true){
+				wasItRight.innerHTML = "Correct word, you have scored " + playerWord.value.length + " points!"
+			} else {
+				wasItRight.innerHTML = "Wrong"
+			}
+			startAgainButton.style.visibility = 'visible';
+			startAgainButton.addEventListener('click', playAgain);
+			gameStarted = false;
 		});
 	}
 }
+
+function playAgain(){
+	lettersChosen = [];
+	startCountdown();
+	wasItRight.innerHTML = "";
+	letters.childNodes[9].innerText = "";
+	letters.childNodes[1].innerText = "";
+	letters.childNodes[2].innerText = "";
+	letters.childNodes[3].innerText = "";
+	letters.childNodes[4].innerText = "";
+	letters.childNodes[5].innerText = "";
+	letters.childNodes[6].innerText = "";
+	letters.childNodes[7].innerText = "";
+	letters.childNodes[8].innerText = "";
+	playerWord.value = "";
+	time = 30;
+}
+
+startCountdown();

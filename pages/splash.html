@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<link rel=stylesheet href=style.css>
+	</head>
+	<body>
+		<header>
+			<h1>DOWNCOUNT</h1>
+		</header>
+		<article id=splashScreen>
+			<h2>And your countdown starts ... now!</h2>
+			<p>Welcome to Countdown, a popular game show from Channel 4 bought to the
+				 internet! Either on your own or with another player, the aim is to make
+				 the largest word from a choice of nine letters in 30 seconds. The longest and valid word will win
+				 points. The player with the most points wins the game.</p>
+			<p>To start, choose either of the options. Multiplayer games will be matchmade automatically,
+			your opponent will be random!</p>
+			<p id=name>Enter a name: <input id=playerName></p>
+			<p><a href=game.html><button id=solo>Start a solo game</button></a></p>
+			<p><a href=game.html><button id=multi>Start a multiplayer game</button></a></p>
+		</article>
+		<footer>
+			<p>WEBRES Sprint 2 Group 6</p>
+		</footer>
+	</body>
+	<script src=/socket.io/socket.io.js></script>
+	<script src=/js/clock.js></script>
+	<script src=/js/game.js></script>
+</html>
