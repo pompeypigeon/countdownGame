@@ -40,12 +40,12 @@ io.on('connection', function(socket){
             io.sockets.emit('timeLeft','Time left: ' + time.ms);
         })
         timer.onDone(function(){
-            console.log('we done bitches');
-            socket.emit('TIMES UP MUDDA');
+            console.log('Done');
+            socket.emit('Time is up');
         })
     })
     socket.on('disconnect', function(){
-        console.log('Fuckity bye!');
+        console.log('User disconnected');
     });
 });
 

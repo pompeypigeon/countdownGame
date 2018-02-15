@@ -6,18 +6,25 @@ var		userChoice,
 			socket = io();
 
 //query selectors
-const 	clock = document.querySelector('#clock'),
+const 	splashScreen = document.querySelector('#splashScreen'),
+				gameScreen = document.querySelector('#gameScreen'),
+				clock = document.querySelector('#clock'),
 				letters = document.querySelector('#letters'),
-				startGame = document.querySelector('#startGame'),
 				vowelButton = document.querySelector('#vowel'),
-				consonantButton = document.querySelector('#consonant');
+				consonantButton = document.querySelector('#consonant'),
+				startSolo = document.querySelector('#solo'),
+				startMulti = document.querySelector('#multi');
 
 //event listeners
-startGame.addEventListener('click', startCountdown);
+startSolo.addEventListener('click', startCountdown);
+startMulti.addEventListener('click', startCountdown);
 
 function startCountdown(){
 	if(!gameStarted == true){
 		gameStarted = true;
+		console.log("Why?");
+		gameStarted.style.display = 'absolute';
+		splashScreen.style.display = 'none';
 		vowelButton.addEventListener('click', getVowel);
 		consonantButton.addEventListener('click', getConsonant);
 		waitForLetters();

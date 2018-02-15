@@ -4,11 +4,24 @@
 	</head>
 	<body>
 		<header>
-			<h1>COUNTDOWN</h1>
+			<h1>DOWNCOUNT</h1>
 		</header>
+		<article id=splashScreen>
+			<h2>And your countdown starts ... now!</h2>
+			<p>Welcome to Countdown, a popular game show from Channel 4 bought to the
+				 internet! Either on your own or with another player, the aim is to make
+				 the largest word from a choice of nine letters in 30 seconds. The longest and valid word will win
+				 points. The player with the most points wins the game.</p>
+			<p>To start, choose either of the options. Multiplayer games will be matchmade automatically,
+			your opponent will be random!</p>
+			<p><button id=solo>Start a solo game</button></p>
+			<p><button id=multi>Start a multiplayer game</button></p>
+		</article>
 		<article id=gameScreen>
-			<canvas id=clock width=300px height=300px>
-			</canvas>
+			<div id=cnvWrap>
+				<canvas id=clock width=300px height=300px>
+				</canvas>
+			</div>
 				<ul id=letters>
 					<li id=1>
 					<li id=2>
@@ -21,7 +34,6 @@
 					<li id=9>
 				</ul>
 			<div id=playerInput>
-				<p><button id=startGame>Start Game</button></p>
 				<p><button id=vowel>Vowel</button><button id=consonant>Consonant</button>
 				<p><input id=playerWord></p>
 				<p id=largestWord>
@@ -33,6 +45,6 @@
 		</footer>
 	</body>
 	<script src=/socket.io/socket.io.js></script>
-	<script src=clock.js></script>
-	<script src=client.js></script>
+	<script src=/js/clock.js></script>
+	<script src=/js/game.js></script>
 </html>

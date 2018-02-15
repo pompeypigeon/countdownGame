@@ -37,6 +37,3 @@ ctx.fillStyle = 'darkblue';
 ctx.fill();
 
 ctx.beginPath();*/
-
-
-
