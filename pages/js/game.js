@@ -70,6 +70,7 @@ function waitForLetters(){
 }
 
 function waitForCountdown(){
+	var validWord = 0;
 	if (time!= 0){
 		setTimeout(waitForCountdown, 100);
 		return
@@ -77,7 +78,6 @@ function waitForCountdown(){
 		socket.emit('wordValidity', playerWord.value)
 		socket.emit('addStats', gameID, lettersChosenString, playerWord.value);
 		socket.on('wordResponse', function(data){
-			var validWord = 0;
 			var lettersString = "";
 			if (data === true){
 				wasItRight.innerHTML = "Correct word, you have scored " + playerWord.value.length + " points!";

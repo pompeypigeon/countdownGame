@@ -63,7 +63,7 @@ io.on('connection', function(socket){
         var timer = new Stopwatch(30000);
         timer.start();
         timer.onTime(function(time){
-            console.log(time.ms);
+            //console.log(time.ms);
             socket.emit('timeLeft', time.ms);
         })
         timer.onDone(function(){

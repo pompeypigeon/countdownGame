@@ -1,5 +1,5 @@
 body{
-	font-family: Arial, sans-serif;
+	font-family: Lucida, Arial, sans-serif;
 	background-color: lightblue;
 }
 
@@ -8,49 +8,42 @@ header{
 	top: 0;
 	left: 0;
 	width: 100%;
-	background-color: darkblue;
+	padding-left: 0.5em;
 	color: white;
-	padding-left: 2em;
+	background-color: darkblue;
 }
 
-#splashScreen{
-	display: absolute;
-	margin-top: 5.3em;
-	width: 40%;
-	padding: 3em;
-	margin-left: auto;
-	margin-right: auto;
+aside{
+	float: right;
+	padding: 0.2em;
+	border: 2px solid darkblue;
 	background-color: white;
-	border: darkblue 3px solid;
-	border-radius: 5px;
-}
-
-#solo, #multi{
-	width: 100%;
-	height: 3em;
 }
 
 #gameScreen{
-	padding-top: 5em;
+	margin-top: 6em;
+	width: 70%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid black;
 }
 
-#cnvWrap{
-	padding-left: 25%;
+#timeLeft{
+	font-size: 200%;
+	font-weight: bold;
+	margin-left: 2em;
 }
 
-canvas{
-	border: 7px solid darkblue;
-	border-radius: 50px 50px 0px 0px;
-	position: absolute;
-	width: 520px;
-	height: 375px;
-	background-image: url("img/clock.jpg");
+img{
+	margin-left: 2em;
+	max-width: 100%;
+	height: auto;
+	background-image: url('img/clock.jpg');
 }
 
 #letters{
-	position: absolute;
-	padding-top: 23.2em;
-	padding-left: 23.2%;
+	margin: auto;
 }
 
 #letters li{
@@ -64,35 +57,20 @@ canvas{
 	background-color: darkblue;
 }
 
-#vowel, #consonant{
+#vowel, #consonant, #startAgain{
 	background-color: darkblue;
 	color: white;
 	font-size: 200%;
-	margin-top: 15em;
-}
-
-#vowel:hover, #consonant:hover{
-	background-color: blue;
 }
 
 #vowel{
-	margin-left: 9em;
+	margin-left: 2em;
 }
 
 #consonant{
-	margin-left: 4em;
+	margin-left: 2em;
 }
 
-#wordInput{
+#playerWord{
 	font-size: 200%;
-	margin-left: 8em;
-}
-
-#info{
-	border: 7px solid darkblue;
-	position: absolute;
-	background-color: white;
-	top: 4.6em;
-	left: 0;
-	padding: 0.3em;
 }
