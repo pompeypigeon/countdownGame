@@ -8,8 +8,8 @@
 			<h1>DOWNCOUNT</h1>
 		</header>
 		<article id=gameScreen>
+			<p id=timer>Clock broke due to broke, heres a digital count: <span id=timeLeft>30</span>
 			<div id=cnvWrap>
-        <p id=timeLeft>30</p>
 				<canvas id=clock width=300px height=300px>
 				</canvas>
 			</div>
@@ -27,13 +27,12 @@
 				<p><button id=vowel>Vowel</button><button id=consonant>Consonant</button>
 				<p>Enter your word: <input id=playerWord onkeydown="return validAnswer(event)"></p>
         <p id=wasItRight></p>
-        <button id=startAgain>Another around?</button>
+        <button id=startAgain>Another Round?</button>
 		</article>
 		<aside id=info>
       <h2>Information</h2>
-      <p id=roomID>Room ID: </p>
-      <p id=p1>Player 1: _____</p>
-      <p id=p2>Player 2: _____</p>
+      <p>Room ID: <span id=roomID></span></p>
+      <p>Your score: <span id=p1></span></p>
     </aside>
 		<footer>
 			<p>WEBRES Sprint 2 Group 6</p>

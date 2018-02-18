@@ -1,13 +1,26 @@
 'use strict'
 
 var	fs = require('fs'),
+		mysql = require('mysql'),
 		express = require('express'),
 		app = express(),
 		http = require('http').Server(app),
 		io = require('socket.io')(http),
 		checkword = require('check-word'),
 		words = checkword('en'),
-		Stopwatch = require('timer-stopwatch');
+		Stopwatch = require('timer-stopwatch'),
+		conn = mysql.createConnection({
+							host: 'localhost',
+							user: 'root',
+							password: 'root',
+							database: 'cdStats'
+});
+
+//connect to mysql db (I know its mysql, not mongo, outta time, deal wid it ;) )
+conn.connect(function(err){
+	if (err) throw err;
+	console.log('DB Connected')
+});
 
 //serve static html page
 app.use(express.static(__dirname + '/pages'));
@@ -26,6 +39,16 @@ app.get('/letter/:type', function(req,res){
 io.on('connection', function(socket){
     console.log('A user connected');
     console.log(Object.keys(io.sockets.sockets).length);
+
+		//ADD DATA TO DB====================================
+		socket.on('addStats', function(gameID, letters, word){
+			var query = 'insert into Statistic (gameID, lettersChosen, wordEntered)' +
+			 'values (' + gameID + ', "' + letters + '", "' + word + '");';
+			 conn.query(query, function(err){
+				 if (err) throw err;
+				 console.log('Data entered, thanks!');
+			 })
+		})
 
 		//WORD CHECK========================================
     socket.on('wordValidity', function(data) {
@@ -56,6 +79,8 @@ io.on('connection', function(socket){
         io.sockets.emit('letterResponse',letter);
     })
 
+		socket.om
+
 		//DISCONNECT=======================================
     socket.on('disconnect', function(){
         console.log('User disconnected');
@@ -65,7 +90,7 @@ io.on('connection', function(socket){
 http.listen(3000, function(){
 	console.log('listening on *:3000');
 });
-//============================================= FUNCTIONS ============================================
+//FUNCTIONS============================================
 
 //read letter frequenies from frequency.json
 var obj;
