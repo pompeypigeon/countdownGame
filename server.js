@@ -79,8 +79,6 @@ io.on('connection', function(socket){
         socket.emit('letterResponse',letter); //io.sockets.emit to all clients
     })
 
-		socket.om
-
 		//DISCONNECT=======================================
     socket.on('disconnect', function(){
         console.log('User disconnected');
