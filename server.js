@@ -76,7 +76,7 @@ io.on('connection', function(socket){
     socket.on('letterRequest', function(data){
         var letter = generateLetter(data);
         console.log(letter);
-        io.sockets.emit('letterResponse',letter);
+        socket.emit('letterResponse',letter); //io.sockets.emit to all clients
     })
 
 		socket.om
